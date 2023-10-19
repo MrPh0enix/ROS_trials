@@ -3,6 +3,8 @@
 import rospy
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
+import time
+
 
 class TurtlebotMover():
 
@@ -20,7 +22,7 @@ class TurtlebotMover():
             self.vel.linear.x = 0
             self.vel.angular.z = 0.2
             self.stage1 = True
-        elif self.stage2==False and (data.pose.pose.position.z >= ):
+        elif self.stage2==False and (data.pose.pose.position.z >= 20):
             self.vel.angular.z = 0
             self.vel.linear.x = 0.1
             self.stage2==True
@@ -31,20 +33,106 @@ class TurtlebotMover():
 
         
 
-
-
     def mover(self):
         pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
-        sub = rospy.Subscriber("odom", Odometry, self.callback)
+        # sub = rospy.Subscriber("odom", Odometry, self.callback)
         rospy.init_node('mover', anonymous=True)
         rate = rospy.Rate(100)
 
-        self.vel.linear.x = 0.1
-        # self.vel.angular.z = 0.1
+        t_init = rospy.Time.now().to_sec()
 
-        while not rospy.is_shutdown():
-            pub.publish(self.vel)
+        self.vel.linear.x = 0.1
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(10).to_sec():
+            pub.publish( self.vel )
             rate.sleep()
+        
+        self.vel.linear.x = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.angular.z = 0.4
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(3.927).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+        
+        self.vel.angular.z = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.linear.x = 0.1
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(10).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.linear.x = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.angular.z = 0.4
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(3.927).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.angular.z = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.linear.x = 0.1
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(10).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.linear.x = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.angular.z = 0.4
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(3.927).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.angular.z = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.linear.x = 0.1
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(10).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.linear.x = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.angular.z = 0.4
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(3.927).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.angular.z = 0
+        pub.publish(self.vel)
+        time.sleep(1)
+        t_init = rospy.Time.now().to_sec()
+        self.vel.linear.x = 0.1
+
+        while rospy.Time.now().to_sec() - t_init < rospy.Duration(10).to_sec():
+            pub.publish( self.vel )
+            rate.sleep()
+
+        self.vel.linear.x = 0
+        pub.publish(self.vel)
+
+
+
+
 
 
 if __name__ == "__main__":
